@@ -2,9 +2,11 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.UserDao;
 import cn.itcast.dao.impl.UserDaoImpl;
+import cn.itcast.domain.PageBean;
 import cn.itcast.domain.User;
 import cn.itcast.service.UserService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -38,5 +40,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         dao.update(user);
+    }
+
+    @Override
+    public void delSelectUsers(String[] uids) {
+        for (String uid : uids) {
+            dao.delete(Integer.parseInt(uid));
+        }
+    }
+
+    @Override
+    public PageBean<User> findUserByPage(String _currentPage, String _rows) {
+        PageBean<User> pageBean = new PageBean<User>();
+
+        return null;
     }
 }

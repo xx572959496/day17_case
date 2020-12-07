@@ -26,7 +26,27 @@
         }
         window.onload = function () {
             document.getElementById("delSelected").onclick = function () {
-                document.getElementById("form").submit();
+                var cbs = document.getElementsByName("uid");
+                var flag = false;
+                for (let i = 0; i < cbs.length; i++) {
+                    if (cbs[i].checked){
+                        flag = true;
+                    }
+                }
+                if (flag == true){
+                    if (confirm("您确定要删除嘛?")){
+                        document.getElementById("form").submit();
+                    }
+                }else{
+                    alert("没有选中的");
+                }
+            }
+
+            document.getElementById("firstCb").onclick = function () {
+                var cbs = document.getElementsByName("uid");
+                for (let i = 0; i < cbs.length; i++) {
+                    cbs[i].checked = this.checked;
+                }
             }
         }
     </script>
@@ -66,7 +86,7 @@
     <form id="form" action="${pageContext.request.contextPath}/delSelectServlet" method="post">
         <table border="1" class="table table-bordered table-hover">
             <tr class="success">
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" id="firstCb"></th>
                 <th>编号</th>
                 <th>姓名</th>
                 <th>性别</th>
